@@ -1,7 +1,7 @@
 {
-    "name": "Derelict Extractors",
+    "name": "DerelictExtractors",
     "version_number": "0.2.3",
-    "website_url": "",
-    "description": "",
+    "website_url": "https://github.com/GinFuyou/Timberborn-GinFuyou",
+    "description": "[180x240] Map with somewhat unusual water sources. See inside for description and previews.",
     "dependencies": []
 }
