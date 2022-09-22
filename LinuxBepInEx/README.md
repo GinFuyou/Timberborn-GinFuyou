@@ -1,4 +1,5 @@
-**This is edited script for running BepInEx for ![Timberborn logo]( "Timberborn") Timberborn under Linux**
+**This is edited script for running [BepInEx](https://github.com/BepInEx/BepInEx) for ![Timberborn logo](https://raw.githubusercontent.com/GinFuyou/Timberborn-GinFuyou/main/LinuxBepInEx/illustrations/Timberborn20x.webp "Timberborn") Timberborn under Linux**
+
 
 # How to use
 This is compilation of instructions found on different sources and for various Games adapted for **Timberborn** with own experience.
@@ -20,6 +21,12 @@ Be warned, these are by no means well-tested, if you find mistakes or problems o
  it's only needed for debuging, you can remove it
 
 5. Start the game via Steam (it may not launch from console)
+---
+You know BepInEx is running if you see it's console window before the game starts (it will stay in the background while game is running)
+
+![Console window](https://raw.githubusercontent.com/GinFuyou/Timberborn-GinFuyou/main/LinuxBepInEx/illustrations/BepInEx_console.png "BepInEx Console")
+
+> It might have important or not that much warnings, note them if you have problems.
 
 ## Prerequirements
 To have game starting with active mods you need **winhttp.dll**
