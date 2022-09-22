@@ -1,7 +1,13 @@
-**This is edited script for running BepInEx for Timberborn under Linux**
+**This is edited script for running BepInEx for ![Timberborn logo]( "Timberborn") Timberborn under Linux**
 
 # How to use
+This is compilation of instructions found on different sources and for various Games adapted for **Timberborn** with own experience.
+
+Be warned, these are by no means well-tested, if you find mistakes or problems on other configs (I'm running Manjaro here), please post an issue.
+
 ## Using the start script itself
+*By "this file" I'm referring to `timberborn_linux_bepinex.sh`*
+
 1. Prerequirements must be fulfilled
 2. Place this file in your game's dir (along with Timberborn.exe)
 3. Make this script executable with ```chmod u+x timberborn_linux_bepinex.sh```
@@ -56,3 +62,16 @@ _Prepend_ this to game's Steam launch options
 WINEDLLOVERRIDES="winhttp=n,b"
 ```
 *Taken from https://github.com/ebkr/r2modmanPlus/pull/350*
+
+- #### protontricks runs but doesn't create winhttp.dll in the game dir
+> this issue is not well studied
+
+Some reports say that it may be caused by permissions issue.
+
+One can try deleting **winhttp.dll** in your proton prefix (prefixes are located in your steam library `Steam/steamapps/compatdata/` file under it in `windows/syswow64/`) and re-trying running protontricks step again
+
+> "**prefix**" is environment used for Windows compatibility for Wine \ Proton. Basically it's directory that contains configurations, libraries and folders emulating Windows typical structure. e.g. it's location *may* look like:
+```
+/home/<your_user>/.local/share/Steam/steamapps/compatdata/1062090/pfx/drive_c/
+```
+> Proton can have multiple prefixes for different games, you can know which prefix the game is using by searching for "Timberborn" in `compatdata/`. It will likely be in Steam library where Timberborn itself is installed.
