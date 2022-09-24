@@ -7,7 +7,7 @@
 # Comments are mix of original and my edits, I've tried to mark my additions.
 #
 # HOW TO USE:
-# 1. Prerequirements must be fulfilled, see readme.md
+# 1. Prerequirements must be fulfilled, see README.md
 # 2. Place this file in your game's dir (along with Timberborn.exe)
 # 3. Make this script executable with `chmod u+x ./timberborn_linux_bepinex.sh`
 # 4. In Steam, go in Steam Library -> (Game) Properties -> General -> Launch Options. Change it to:
@@ -41,25 +41,45 @@ if [ "$2" = "SteamLaunch" ]; then
     # Gin: This is debug part. You can sagerly remove it
     echo "Executing SteamLaunch"
     cmd="$1 $2 $3 $4 $0"
-    echo "[command]: $cmd"
+    echo "[original command]: $cmd (it will be discarded)"
     i=1
-    echo "arguments (0 is base command):"
+    echo "arguments (0 is the base command):"
     echo " $0"
+
+    # Gin: regex to detect argument with proton executable:
+    proton_regex='\/proton$'
+    # Gin: set command to empty to try to detect proton command later with regular expression
+    cmd=""
+    shift_by=0
+
+    # Gin: list all passed args and find one with proton command
     for var in "$@"
     do
-        echo " $i: $var"
+
+        if [[ $var =~ $proton_regex ]]
+        then
+            echo " $i: $var [Will use this as cmd]"
+            cmd=$var
+            shift_by=$i
+        else
+            echo " $i: $var"
+        fi
         i=$(( i + 1 ))
     done
 
-    # Gin: a hack to launch game via python (because of space escaping issues)
-    # PYARGS="[\"$8\", \"$9\", \"${10}\"]"
-    # echo "py args: $PYARGS"
-    # python3 -c $"exec('import subprocess\nsubprocess.run($PYARGS)')"  # this works
+    if [ "$cmd" = "" ]
+    then
+        echo "ERROR: command is not found. Either script didn't get expected arguments or regular expresion in it is wrong. Check the list of args above."
+        echo "- regular expression was: '$proton_regex' (refer to https://regex101.com/)"
+        echo "Terminating."
+        exit 1
+    fi
 
     # Gin: remove first args: WARNING arguments SHIFT
     # Gin: Run directly with Proton (no Steam wrappers)
-    cmd=$8  # this should be path to proton executable. Beware of space in the path
-    shift 8
+    # cmd="${10}"  # this should be path to proton executable. Beware of space in the path
+    echo "[shift arguments by]: $shift_by"
+    shift $shift_by
 
     # Gin: more debug output
     echo "[new command]: $cmd"
