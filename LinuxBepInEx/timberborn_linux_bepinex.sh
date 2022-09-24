@@ -5,9 +5,11 @@
 # I've renamed the file, but usage is the same
 # It runs Proton directly because wrappers break for me
 # Comments are mix of original and my edits, I've tried to mark my additions.
+# DISCLAIMER: I'm a python coder, sh/bash scripting looks like Chinese to me, still I think I've changed
+# it to something more reasonable, but don't take my word for it, and use on your own risk.
 #
 # HOW TO USE:
-# 1. Prerequirements must be fulfilled, see README.md
+# 1. Prerequirements must be fulfilled, see README.md (https://github.com/GinFuyou/Timberborn-GinFuyou/blob/main/LinuxBepInEx/README.md)
 # 2. Place this file in your game's dir (along with Timberborn.exe)
 # 3. Make this script executable with `chmod u+x ./timberborn_linux_bepinex.sh`
 # 4. In Steam, go in Steam Library -> (Game) Properties -> General -> Launch Options. Change it to:
@@ -34,6 +36,8 @@ a="/$0"; a=${a%/*}; a=${a#/}; a=${a:-.}; BASEDIR=$(cd "$a"; pwd -P)
 
 echo ">> Starting [$(date)]"
 echo " --- "
+echo "(?) if you see erros like 'ERROR: ld.so: object '<...>/Steam/ubuntu12_32/gameoverlayrenderer.so' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS32): ignored.' "
+echo "(?) it is not necessary a problem, game can start modded with these warnings. It might be related to proton using 64-bit wine prefix."
 
 # Special case: program is launched via Steam
 # In that case rerun the script via their bootstrapper to ensure Steam overlay works

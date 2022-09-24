@@ -1,5 +1,8 @@
+# Introduction
+
 **This is edited script for running [BepInEx](https://github.com/BepInEx/BepInEx) for ![Timberborn logo](https://raw.githubusercontent.com/GinFuyou/Timberborn-GinFuyou/main/LinuxBepInEx/illustrations/Timberborn20x.webp "Timberborn") Timberborn under Linux**
 
+DISCLAIMER: I'm a python coder, sh/bash scripting looks like Chinese to me, still I think I've changed it to something more reasonable, but don't take my word for it, and use on your own risk.
 
 # How to use
 This is compilation of instructions found on different sources and for various Games adapted for **Timberborn** with own experience.
@@ -82,13 +85,14 @@ One can try deleting **winhttp.dll** in your proton prefix (prefixes are located
 Some more studies shows that steam dir where real file (not a symlink) is placed can have no write (w) permissions for owner.
 Inside *your* steam library
 ```sh
-ls -l steamapps/compatdata/1062090/pfx/dosdevices/c:/windows/syswow64/ | grep winhttp                                            ✔ 
-lrwxrwxrwx 1 gin gin      99 сен 24 16:56 winhttp.dll -> /<your steam lib>/steamapps/common/Proton - Experimental/files/lib/wine/i386-windows/winhttp.dll
+ls -l steamapps/compatdata/1062090/pfx/dosdevices/c:/windows/syswow64/ | grep winhttp                                            ✔
+lrwxrwxrwx 1 gin gin      99 sep 24 16:56 winhttp.dll -> /<your steam lib>/steamapps/common/Proton - Experimental/files/lib/wine/i386-windows/winhttp.dll
 ```
 This shows file on this location is actually a link, copy the full path on the right without the file name. `<your steam lib>` will be your actual steam library path, replace it with it in commands beneath. Proton version will also depend on one you've using to launch the game (set in Steam game's properties)
+> Don't forget to wrap paths that have spaces (proton path do) in `""`
 ```sh
-ls -la '/<your steam lib>/steamapps/common/Proton - Experimental/files/lib/wine/i386-windows/' | grep winhttp                                      ✔ 
--rw-r--r-- 1 gin gin   310784 июн 19  2003 winhttp.dll
+ls -la '/<your steam lib>/steamapps/common/Proton - Experimental/files/lib/wine/i386-windows/' | grep winhttp                                      ✔
+-rw-r--r-- 1 gin gin   310784 jun 19  2003 winhttp.dll
 ```
 If you don't see "w" in this part "-r**w**-r--r--" - it's missing write permissions. I've changed permissions recursively on whole dir:
 ```sh
@@ -105,4 +109,14 @@ Then re-try protontricks step.
 > Proton can have multiple prefixes for different games, you can know which prefix the game is using by searching for "Timberborn" in `compatdata/`. It will likely be in Steam library where Timberborn itself is installed.
 
 - #### protontricks --gui doesn't list Timberborn
-You need to lanch Timberborn once so it will create a prefix dir. It probably doesn't even need to be succesfully finish starting. 
+You need to lanch Timberborn once so it will create a prefix dir. It probably doesn't even need to be succesfully finish starting.
+
+
+- #### "Wrong ELF class" errors during start
+You might be getting errors like:
+```
+ERROR: ld.so: object '<...>/Steam/ubuntu12_32/gameoverlayrenderer.so' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS32): ignored.
+```
+It's not necessary a problem preventing starting game or loading mods.
+
+I have a guess it's caused by Proton apparently using 64-bit prefixes and failing to load some 32-bit utils. Further insight on it is welcome.
