@@ -20,13 +20,17 @@ To have game starting with active mods you need **winhttp.dll**
 ```sh
 sudo pip install -U protontricks
 ```
-> if `pip` is not found use `pip3`, if you have neither install `python-pip` or follow original instructions.
-> You should be using python 3.x, python 2.x is outdated, but distribution can have both and commands aliased differently.
+> if `pip` is not found use `pip3`, if you have neither install `python-pip` or follow original instructions.  
+> You should be using python 3.x, python 2.x is outdated, but distribution can have both and commands aliased differently.  
 > Pip complaining about running with sudo is giving a *generally* good advice, but it's not critical for us, and might be tricky to use, just ignore it in this case.
 3. In terminal, run "protontricks  --gui" (and ignore error messages)
 > I have no idea what error original instruction meant, it may give some warning about missing environmental variables but says it is using defaults so it's fine, or about using 64bit WINEPREFIX, or outdated winetricks - neither should be critical.
+  
+> Note from https://docs.bepinex.dev/articles/advanced/proton_wine.html (they use winecfg, both methods should work)  
+> "If you have a Steam Deck, the protontricks --gui command most likely won't work. Instead, you need to install protontricks via discovery store, and then launch it via the Steam search bar. Launching it via discovery store won't work."
 4. Check Select Timberborn in App list
-5. In the GUI, choose "Select the default Wine prefix". In title of following window you should see "current prefix is <path to compatdata/1062090/pfx>" - 1062090 is Timberborn app id on Steam.
+5. In the GUI, choose "Select the default Wine prefix" 
+> The title of following window should have "current prefix is <path to compatdata/1062090/pfx>" - 1062090 is Timberborn app id on Steam.
 6. Choose "Install a Windows DLL or component"
 7. Scroll down and check **"winhttp"** then click OK
 > When it finishes you'll be back to original window, just close it.
