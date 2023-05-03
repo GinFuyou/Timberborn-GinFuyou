@@ -1,58 +1,39 @@
 # Introduction
+**This is a guide for installing and using mods on Linux systems via Proton for ![Timberborn logo](https://raw.githubusercontent.com/GinFuyou/Timberborn-GinFuyou/main/LinuxBepInEx/illustrations/Timberborn20x.webp "Timberborn") [Timberborn](https://store.steampowered.com/app/1062090/Timberborn/ "Game Steam store page")** 
 
-**This is edited script for running [BepInEx](https://github.com/BepInEx/BepInEx) for ![Timberborn logo](https://raw.githubusercontent.com/GinFuyou/Timberborn-GinFuyou/main/LinuxBepInEx/illustrations/Timberborn20x.webp "Timberborn") Timberborn under Linux**
+> NOTE: It used to be a guide for a *script* that was needed, but it apparently not required anymore. Ignore script section until you can't get it to work with prior steps.
 
-DISCLAIMER: I'm a python coder, sh/bash scripting looks like Chinese to me, still I think I've changed it to something more reasonable, but don't take my word for it, and use on your own risk.
+It is compilation of instructions found on different sources and for various Games adapted for **Timberborn** with own experience.
 
-# How to use
-This is compilation of instructions found on different sources and for various Games adapted for **Timberborn** with own experience.
-
-Be warned, these are by no means well-tested, if you find mistakes or problems on other configs (I'm running Manjaro here), please post an issue.
-
-## Using the start script itself
-*By "this file" I'm referring to `timberborn_linux_bepinex.sh`*
-
-1. Prerequirements must be fulfilled
-2. Place this file in your game's dir (along with Timberborn.exe)
-3. Make this script executable with ```chmod u+x timberborn_linux_bepinex.sh```
->  you must be in the game dir, otherwise use absolute path
-4. In Steam, go in Steam Library -> (Game) Properties -> General -> Launch Options. Change it to:
-```
-./timberborn_linux_bepinex.sh %command% > ~/timberborn.log 2>&1
-```
->   `> ~/timberborn.log 2>&1` part will redirect output to your home dir's timberborn.log
- it's only needed for debuging, you can remove it
-
-5. Start the game via Steam (it may not launch from console)
----
-You know BepInEx is running if you see it's console window before the game starts (it will stay in the background while game is running)
-
-![Console window](https://raw.githubusercontent.com/GinFuyou/Timberborn-GinFuyou/main/LinuxBepInEx/illustrations/BepInEx_console.png "BepInEx Console")
-
-> It might have important or not that much warnings, note them if you have problems.
-
-## Prerequirements
+# Requirements to run mods
 To have game starting with active mods you need **winhttp.dll**
 
 *Original instruction is here*: https://github.com/BepInEx/BepInEx/issues/110
 
-My moddified instruction:
+## Installing requirements
 
-1. Install Protontricks https://github.com/Sirmentio/protontricks (requires Winetricks https://wiki.winehq.org/Winetricks)
+1. Install **winetricks**, it should be provided by your package manager. (required for protontricks to work, [about it](https://wiki.winehq.org/Winetricks))
+- for Manjaro (won't work on distributions with different manager): `pamac install winetricks`
+
+2. Install **protontricks** ([about it](https://github.com/Sirmentio/protontricks))
 
 ```sh
 sudo pip install -U protontricks
 ```
-> if `pip` is not found use `pip3`, if you have neither install `python-pip` or follow original instructions
-> You should be using python 3.x, python 2.x is outdated, but distribution can have both and commands aliased differently
-2. In terminal, run "protontricks  --gui" (and ignore the error msg)
-> I have no idea what error original instruction meant, it may give some warning about missing environmental variables but says it is using defaults so it's fine
-3. Select Timberborn in App list
-4. In the GUI, choose "Select the default Wine prefix"
-5. Choose "Install a Windows DLL or component"
-6. Scroll down and check "winhttp" then click OK
+> if `pip` is not found use `pip3`, if you have neither install `python-pip` or follow original instructions.
+> You should be using python 3.x, python 2.x is outdated, but distribution can have both and commands aliased differently.
+> Pip complaining about running with sudo is giving a *generally* good advice, but it's not critical for us, and might be tricky to use, just ignore it in this case.
+3. In terminal, run "protontricks  --gui" (and ignore error messages)
+> I have no idea what error original instruction meant, it may give some warning about missing environmental variables but says it is using defaults so it's fine, or about using 64bit WINEPREFIX, or outdated winetricks - neither should be critical.
+4. Check Select Timberborn in App list
+5. In the GUI, choose "Select the default Wine prefix". In title of following window you should see "current prefix is <path to compatdata/1062090/pfx>" - 1062090 is Timberborn app id on Steam.
+6. Choose "Install a Windows DLL or component"
+7. Scroll down and check **"winhttp"** then click OK
+> When it finishes you'll be back to original window, just close it.
 
-### Known issues
+You are ready to add BepinEx and mods!
+
+## Known issues
 - #### protontricks fails with following error:
 ```pycon
 Traceback (most recent call last):
@@ -120,3 +101,32 @@ ERROR: ld.so: object '<...>/Steam/ubuntu12_32/gameoverlayrenderer.so' from LD_PR
 It's not necessary a problem preventing starting game or loading mods.
 
 I have a guess it's caused by Proton apparently using 64-bit prefixes and failing to load some 32-bit utils. Further insight on it is welcome.
+
+# How to use the SCRIPT
+> Depricated, try only if prior steps didn't work on themselves.
+
+DISCLAIMER: I'm a python coder, sh/bash scripting looks like Chinese to me, still I think I've changed it to something more reasonable, but don't take my word for it, and use on your own risk.
+
+Be warned, these are by no means well-tested, if you find mistakes or problems on other configs (I'm running Manjaro here), please post an issue.
+
+## Using the start script itself
+*By "this file" I'm referring to `timberborn_linux_bepinex.sh`*
+
+1. Prerequirements must be fulfilled
+2. Place this file in your game's dir (along with Timberborn.exe)
+3. Make this script executable with ```chmod u+x timberborn_linux_bepinex.sh```
+>  you must be in the game dir, otherwise use absolute path
+4. In Steam, go in Steam Library -> (Game) Properties -> General -> Launch Options. Change it to:
+```
+./timberborn_linux_bepinex.sh %command% > ~/timberborn.log 2>&1
+```
+>   `> ~/timberborn.log 2>&1` part will redirect output to your home dir's timberborn.log
+ it's only needed for debuging, you can remove it
+
+5. Start the game via Steam (it may not launch from console)
+---
+You know BepInEx is running if you see it's console window before the game starts (it will stay in the background while game is running)
+
+![Console window](https://raw.githubusercontent.com/GinFuyou/Timberborn-GinFuyou/main/LinuxBepInEx/illustrations/BepInEx_console.png "BepInEx Console")
+
+> It might have important or not that much warnings, note them if you have problems.
