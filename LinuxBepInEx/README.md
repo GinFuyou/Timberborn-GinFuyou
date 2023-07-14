@@ -34,7 +34,10 @@ sudo pip install -U protontricks
 > if `pip` is not found use `pip3`, if you have neither install `python-pip` or follow original instructions.  
 > You should be using python 3.x, python 2.x is outdated, but distribution can have both and commands aliased differently.  
 > Pip complaining about running with sudo is giving a *generally* good advice, but it's not critical for us, and might be tricky to use, just ignore it in this case.
-3. In terminal, run "protontricks  --gui" (and ignore error messages)
+3. In terminal, run following command (and ignore error messages)
+```sh
+protontricks --gui
+```
 > I have no idea what error original instruction meant, it may give some warning about missing environmental variables but says it is using defaults so it's fine, or about using 64bit WINEPREFIX, or outdated winetricks - neither should be critical.
   
 > Note from https://docs.bepinex.dev/articles/advanced/proton_wine.html (they use winecfg, both methods should work)  
@@ -131,13 +134,20 @@ Try first force-reinstall with pip.
 `sudo pip install -U --force-reinstall protontricks`
 
 If it doesn't help some suggest using **pipx** instead.
-> **pipx** is just a wrapper around **pip** that uses isolated environment for installs, but perhaps it indeed could bystep some problems base pip may have on your system
+> **pipx** is just a wrapper around **pip** that uses isolated environment for installs, but perhaps it could bystep some problems base pip may have on your system
 
 1. install **pipx** ([official guide](https://github.com/pypa/pipx#install-pipx))
-`pip install --user pipx`
-`pipx ensurepath`
-2. install **protontricks** with **pipx** now.
-`pipx install protontricks` 
+```sh
+pip install --user pipx
+```
+2. make **pipx** ensure that terminal is configured correctly for usage (PATH env var)
+```sh
+pipx ensurepath
+```
+3. install **protontricks** with **pipx** now.
+```sh
+pipx install protontricks
+``` 
 > Note that neither command using `sudo` (executing command as priviledged user) `--user` will install into your (current user) home folder, then **pipx** will also use dir inside home. Use this if you don't want or can't use root (sudo).
 
 ---
