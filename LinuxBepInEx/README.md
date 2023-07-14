@@ -131,9 +131,11 @@ ModuleNotFoundError: No module named 'protontricks'
 ```
 This appears that protontricks is not installed properly.  
 Try first force-reinstall with pip.  
-`sudo pip install -U --force-reinstall protontricks`
+```sh
+sudo pip install -U --force-reinstall protontricks
+```
 
-If it doesn't help some suggest using **pipx** instead.
+If it doesn't help - some suggest using **pipx** instead.
 > **pipx** is just a wrapper around **pip** that uses isolated environment for installs, but perhaps it could bystep some problems base pip may have on your system
 
 1. install **pipx** ([official guide](https://github.com/pypa/pipx#install-pipx))
