@@ -47,7 +47,15 @@ sudo pip install -U protontricks
 You are ready to add BepinEx and mods!
 
 ## Known issues
-- #### protontricks fails with following error:
+- [Object has no attribute 'group' error](#protontricks-fails-with-object-has-no-attribute-group-error)
+- [Can't load winhttp.dll](#cant-load-winhttpdll)
+- [Winhttp.dll not created](#protontricks-runs-but-doesnt-create-winhttpdll-in-the-game-dir)
+- [No module named protontricks](#protontricks-fails-with-no-module-named-protontricks-error)
+- [Protontricks doesn't list Timberborn](#protontricks---gui-doesnt-list-timberborn)
+- [Wrong ELF class](#wrong-elf-class-errors-during-start)
+
+
+- #### Protontricks fails with object has no attribute 'group' error:
 ```pycon
 Traceback (most recent call last):
   File "/usr/bin/protontricks", line 309, in <module>
@@ -61,13 +69,14 @@ AttributeError: 'NoneType' object has no attribute 'group'
 Caused by outdated version of protontricks, force-update it, for example with command from above.
 
 - #### Can't load **winhttp.dll**
+
 _Prepend_ this to game's Steam launch options
 ```sh
 WINEDLLOVERRIDES="winhttp=n,b"
 ```
 *Taken from https://github.com/ebkr/r2modmanPlus/pull/350*
 
-- #### protontricks runs but doesn't create winhttp.dll in the game dir
+- #### Protontricks runs but doesn't create winhttp.dll in the game dir
 > this issue is not well studied
 
 Some reports say that it may be caused by permissions issue.
