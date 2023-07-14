@@ -54,8 +54,9 @@ You are ready to add BepinEx and mods!
 - [Protontricks doesn't list Timberborn](#protontricks---gui-doesnt-list-timberborn)
 - [Wrong ELF class](#wrong-elf-class-errors-during-start)
 
+---
 
-- #### Protontricks fails with object has no attribute 'group' error:
+#### Protontricks fails with object has no attribute 'group' error:
 ```pycon
 Traceback (most recent call last):
   File "/usr/bin/protontricks", line 309, in <module>
@@ -68,7 +69,9 @@ AttributeError: 'NoneType' object has no attribute 'group'
 ```
 Caused by outdated version of protontricks, force-update it, for example with command from above.
 
-- #### Can't load **winhttp.dll**
+---
+
+#### Can't load **winhttp.dll**
 
 _Prepend_ this to game's Steam launch options
 ```sh
@@ -76,14 +79,14 @@ WINEDLLOVERRIDES="winhttp=n,b"
 ```
 *Taken from https://github.com/ebkr/r2modmanPlus/pull/350*
 
-- #### Protontricks runs but doesn't create winhttp.dll in the game dir
+---
+
+#### Protontricks runs but doesn't create winhttp.dll in the game dir
 > this issue is not well studied
 
 Some reports say that it may be caused by permissions issue.
 
 One can try deleting **winhttp.dll** in your proton prefix (prefixes are located in your steam library `Steam/steamapps/compatdata/` file under it in `windows/syswow64/`) and re-trying running protontricks step again
-
----
 
 Some more studies shows that steam dir where real file (not a symlink) is placed can have no write (w) permissions for owner.
 Inside *your* steam library
@@ -103,15 +106,15 @@ If you don't see "w" in this part "-r**w**-r--r--" - it's missing write permissi
 ```
 Then re-try protontricks step.
 
----
-
 > "**prefix**" is environment used for Windows compatibility for Wine \ Proton. Basically it's directory that contains configurations, libraries and folders emulating Windows typical structure. e.g. it's location *may* look like:
 ```
 /home/<your_user>/.local/share/Steam/steamapps/compatdata/1062090/pfx/drive_c/
 ```
 > Proton can have multiple prefixes for different games, you can know which prefix the game is using by searching for "Timberborn" in `compatdata/`. It will likely be in Steam library where Timberborn itself is installed.
 
-- #### protontricks fails with "no module named protontricks" error
+---
+
+#### Protontricks fails with "no module named protontricks" error
 ```pycon
 Traceback (most recent call last):
 
@@ -126,7 +129,7 @@ Try first force-reinstall with pip.
 `sudo pip install -U --force-reinstall protontricks`
 
 If it doesn't help some suggest using **pipx** instead.
-> **pipx** is just a wrapper around **pip** that uses isolated environment for installs, but perhaps it indeed could bystep some problems bases pip may have on your system
+> **pipx** is just a wrapper around **pip** that uses isolated environment for installs, but perhaps it indeed could bystep some problems base pip may have on your system
 
 1. install **pipx** ([official guide](https://github.com/pypa/pipx#install-pipx))
 `pip install --user pipx`
@@ -135,11 +138,14 @@ If it doesn't help some suggest using **pipx** instead.
 `pipx install protontricks` 
 > Note that neither command using `sudo` (executing command as priviledged user) `--user` will install into your (current user) home folder, then **pipx** will also use dir inside home. Use this if you don't want or can't use root (sudo).
 
-- #### protontricks --gui doesn't list Timberborn
+---
+
+#### Protontricks --gui doesn't list Timberborn
 You need to lanch Timberborn once so it will create a prefix dir. It probably doesn't even need to be succesfully finish starting.
 
+---
 
-- #### "Wrong ELF class" errors during start
+#### "Wrong ELF class" errors during start
 You might be getting errors like:
 ```
 ERROR: ld.so: object '<...>/Steam/ubuntu12_32/gameoverlayrenderer.so' from LD_PRELOAD cannot be preloaded (wrong ELF class: ELFCLASS32): ignored.
