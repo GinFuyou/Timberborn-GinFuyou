@@ -7,6 +7,8 @@ BepInEx
 
 It is compilation of instructions found on different sources and for various Games adapted for **Timberborn** with own experience.
 
+Using proton presumes you will be running game via Steam, but technically there should be no difference if you run it via proton directly, but this is not covered by this document.
+
 ## IMPORTANT
 We are running game through *proton* Windows compatibility layer, so we are running <ins>Windows version</ins> of the game and <ins>Windows version</ins> of BepInEx, don't confuse with running modded Linux-native game.
 
