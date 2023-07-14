@@ -1,9 +1,14 @@
 # Introduction
 **This is a guide for installing and using mods on Linux systems via Proton for ![Timberborn logo](https://raw.githubusercontent.com/GinFuyou/Timberborn-GinFuyou/main/LinuxBepInEx/illustrations/Timberborn20x.webp "Timberborn") [Timberborn](https://store.steampowered.com/app/1062090/Timberborn/ "Game Steam store page")** 
 
+BepInEx
+
 > NOTE: It used to be a guide for a *script* that was needed, but it apparently not required anymore. Ignore script section until you can't get it to work with prior steps.
 
 It is compilation of instructions found on different sources and for various Games adapted for **Timberborn** with own experience.
+
+## IMPORTANT
+We are running game through *proton* Windows compatibility layer, so we are running <ins>Windows version</ins> of the game and <ins>Windows version</ins> of BepInEx, don't confuse with running modded Linux-native game.
 
 # Requirements to run mods
 To have game starting with active mods you need **winhttp.dll**
@@ -12,8 +17,12 @@ To have game starting with active mods you need **winhttp.dll**
 
 ## Installing requirements
 
-1. Install **winetricks**, it should be provided by your package manager. (required for protontricks to work, [about it](https://wiki.winehq.org/Winetricks))
-- for Manjaro (won't work on distributions with different manager): `pamac install winetricks`
+1. Install **winetricks**, it should be provided by your package manager. (required for protontricks to work, [about it](https://wiki.winehq.org/Winetricks))  
+   Make sure it's up-to-date if already installed.  
+For different distributions \ package managers (you need to pick one you are using):
+- Manjaro: `pamac install winetricks`
+- Ubuntu: `sudo apt-get install winetricks`
+
 
 2. Install **protontricks** ([about it](https://github.com/Sirmentio/protontricks))
 
@@ -92,6 +101,30 @@ Then re-try protontricks step.
 /home/<your_user>/.local/share/Steam/steamapps/compatdata/1062090/pfx/drive_c/
 ```
 > Proton can have multiple prefixes for different games, you can know which prefix the game is using by searching for "Timberborn" in `compatdata/`. It will likely be in Steam library where Timberborn itself is installed.
+
+- #### protontricks fails with "no module named protontricks" error
+```pycon
+Traceback (most recent call last):
+
+File "/<...>/bin/protontricks", line 5, in <module>
+
+from protontricks.cli import main
+
+ModuleNotFoundError: No module named 'protontricks'
+```
+This appears that protontricks is not installed properly.  
+Try first force-reinstall with pip.  
+`sudo pip install -U --force-reinstall protontricks`
+
+If it doesn't help some suggest using **pipx** instead.
+> **pipx** is just a wrapper around **pip** that uses isolated environment for installs, but perhaps it indeed could bystep some problems bases pip may have on your system
+
+1. install **pipx** ([official guide](https://github.com/pypa/pipx#install-pipx))
+`pip install --user pipx`
+`pipx ensurepath`
+2. install **protontricks** with **pipx** now.
+`pipx install protontricks` 
+> Note that neither command using `sudo` (executing command as priviledged user) `--user` will install into your (current user) home folder, then **pipx** will also use dir inside home. Use this if you don't want or can't use root (sudo).
 
 - #### protontricks --gui doesn't list Timberborn
 You need to lanch Timberborn once so it will create a prefix dir. It probably doesn't even need to be succesfully finish starting.
