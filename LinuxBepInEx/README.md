@@ -1,13 +1,13 @@
 # Introduction
 **This is a guide for installing and using mods on Linux systems via Proton for ![Timberborn logo](https://raw.githubusercontent.com/GinFuyou/Timberborn-GinFuyou/main/LinuxBepInEx/illustrations/Timberborn20x.webp "Timberborn") [Timberborn](https://store.steampowered.com/app/1062090/Timberborn/ "Game Steam store page")** 
 
-BepInEx
-
 > NOTE: It used to be a guide for a *script* that was needed, but it apparently not required anymore. Ignore script section until you can't get it to work with prior steps.
 
 It is compilation of instructions found on different sources and for various Games adapted for **Timberborn** with own experience.
 
 Using proton presumes you will be running game via Steam, but technically there should be no difference if you run it via proton directly, but this is not covered by this document.
+
+*Last checked on 17.10.2023 with BepinEx 5.4.22 and game update 5*
 
 ## IMPORTANT
 We are running game through *proton* Windows compatibility layer, so we are running <ins>Windows version</ins> of the game and <ins>Windows version</ins> of BepInEx, don't confuse with running modded Linux-native game.
@@ -15,7 +15,10 @@ We are running game through *proton* Windows compatibility layer, so we are runn
 # Requirements to run mods
 Mod loading is achieved with using BepinEx - Unity modding framework.  
 It's provided in on Timberborn official Mod.io hub [BepInExPack for Timberborn](https://mod.io/g/timberborn/m/bepinexpack)  
-You'll need doorstop libs in your game directory and inject **winhttp.dll** as described below. 
+You'll need **doorstop libs** in your game directory and inject **winhttp.dll** as described below. 
+
+Your game dir could look like this:  
+![Timberborn logo](https://raw.githubusercontent.com/GinFuyou/Timberborn-GinFuyou/main/LinuxBepInEx/illustrations/game_dir.png "Game dir") 
 
 > Injection of doorstop performed by Unity itself, it just needs to be besides the executable.
 
