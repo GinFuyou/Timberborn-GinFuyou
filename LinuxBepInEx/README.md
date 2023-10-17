@@ -171,7 +171,7 @@ I have a guess it's caused by Proton apparently using 64-bit prefixes and failin
 # How to use the SCRIPT
 > Depricated, try only if prior steps didn't work on themselves.
 
-DISCLAIMER: I'm a python coder, sh/bash scripting looks like Chinese to me, still I think I've changed it to something more reasonable, but don't take my word for it, and use on your own risk.
+DISCLAIMER: I'm a python coder, sh/bash scripting is foreign to me, still I think I've changed it to something more reasonable, but don't take my word for it, and use on your own risk.
 
 Be warned, these are by no means well-tested, if you find mistakes or problems on other configs (I'm running Manjaro here), please post an issue.
 

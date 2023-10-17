@@ -1,5 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 # BepInEx running script
+#
+# NOTE: as of 2023 the script should be no longer needed. See Prerequirements for required steps.
+#       Basically you just need replace winhttp.dll and doorstop will inject code on game start.
 #
 # WARNING Edited by GinFuyou because original one didn't work for me
 # I've renamed the file, but usage is the same
