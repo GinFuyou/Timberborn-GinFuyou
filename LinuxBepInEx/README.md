@@ -13,7 +13,11 @@ Using proton presumes you will be running game via Steam, but technically there 
 We are running game through *proton* Windows compatibility layer, so we are running <ins>Windows version</ins> of the game and <ins>Windows version</ins> of BepInEx, don't confuse with running modded Linux-native game.
 
 # Requirements to run mods
-To have game starting with active mods you need **winhttp.dll**
+Mod loading is achieved with using BepinEx - Unity modding framework.  
+It's provided in on Timberborn official Mod.io hub [BepInExPack for Timberborn](https://mod.io/g/timberborn/m/bepinexpack)  
+You'll need doorstop libs in your game directory and inject **winhttp.dll** as described below. 
+
+> Injection of doorstop performed by Unity itself, it just needs to be besides the executable.
 
 *Original instruction is here*: https://github.com/BepInEx/BepInEx/issues/110
 
