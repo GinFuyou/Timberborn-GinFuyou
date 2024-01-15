@@ -14,15 +14,20 @@ We are running game through *proton* Windows compatibility layer, so we are runn
 
 # Requirements to run mods
 Mod loading is achieved with using BepinEx - Unity modding framework.  
-It's provided in on Timberborn official Mod.io hub [BepInExPack for Timberborn](https://mod.io/g/timberborn/m/bepinexpack)  
+It's version pre-configured for Timberborn is provided on Timberborn official Mod.io hub [BepInExPack for Timberborn](https://mod.io/g/timberborn/m/bepinexpack)  
 You'll need **doorstop libs** in your game directory and inject **winhttp.dll** as described below. 
 
 Your game dir could look like this:  
 ![Timberborn logo](https://raw.githubusercontent.com/GinFuyou/Timberborn-GinFuyou/main/LinuxBepInEx/illustrations/game_dir.png "Game dir") 
 
+> Adding BepinEx can be done before or after following guide, but you need it to check if steps have worked for you
+
 > Injection of doorstop performed by Unity itself, it just needs to be besides the executable.
 
 *Original instruction is here*: https://github.com/BepInEx/BepInEx/issues/110
+
+## Does it work on Steam Deck?
+No one have confirmed that to me, but it should. Some steps have notes specifically for it carried over from other guides.
 
 ## Installing requirements
 
@@ -41,7 +46,16 @@ sudo pip install -U protontricks
 > if `pip` is not found use `pip3`, if you have neither install `python-pip` or follow original instructions.  
 > You should be using python 3.x, python 2.x is outdated, but distribution can have both and commands aliased differently.  
 > Pip complaining about running with sudo is giving a *generally* good advice, but it's not critical for us, and might be tricky to use, just ignore it in this case.
-3. In terminal, run following command (and ignore error messages)
+
+> If you have troubles with `pip` or using Steam Deck you might try using `flatpack` installation instead, see: [protontricks installation](https://github.com/Matoking/protontricks#installation)
+
+3. We need to replace **"winhttp.dll"** in proton dirs. Dir itself might be not writable by user on some setups that make next steps fail. Locate your steam library (or proton dir if you are not using Steam). e.g. I have library at `/home/gin/.local/share/Steam/` and proton dirs are located in `steamapps/common/` there. Replace it with your path in following command:
+```sh
+sudo chmod -R u+w /<YOUR STEAM LIB PATH HERE>/steamapps/common/Proton*
+```
+> It adds **w**rite permission to owner **u**ser (you) **r**ecursively on all proton dirs there (since you may have several installed at same time). See known issues section for more details
+
+4. In terminal, run following command (and ignore error messages)
 ```sh
 protontricks --gui
 ```
@@ -49,11 +63,11 @@ protontricks --gui
   
 > Note from https://docs.bepinex.dev/articles/advanced/proton_wine.html (they use winecfg, both methods should work)  
 > "If you have a Steam Deck, the protontricks --gui command most likely won't work. Instead, you need to install protontricks via discovery store, and then launch it via the Steam search bar. Launching it via discovery store won't work."
-4. Check Select Timberborn in App list
-5. In the GUI, choose "Select the default Wine prefix" 
+5. Check Select Timberborn in App list
+6. In the GUI, choose "Select the default Wine prefix" 
 > The title of following window should have "current prefix is <path to compatdata/1062090/pfx>" - 1062090 is Timberborn app id on Steam.
-6. Choose "Install a Windows DLL or component"
-7. Scroll down and check **"winhttp"** then click OK
+7. Choose "Install a Windows DLL or component"
+8. Scroll down and check **"winhttp"** then click OK
 > When it finishes you'll be back to original window, just close it.
 
 You are ready to add BepinEx and mods!
@@ -61,10 +75,11 @@ You are ready to add BepinEx and mods!
 ## Known issues
 - [Object has no attribute 'group' error](#protontricks-fails-with-object-has-no-attribute-group-error)
 - [Can't load winhttp.dll](#cant-load-winhttpdll)
-- [Winhttp.dll not created](#protontricks-runs-but-doesnt-create-winhttpdll-in-the-game-dir)
+- [Winhttp.dll not placed due to permissions](#protontricks-cant-substitute-winhttpdll-due-to-missing-write-permission)
 - [No module named protontricks](#protontricks-fails-with-no-module-named-protontricks-error)
 - [Protontricks doesn't list Timberborn](#protontricks---gui-doesnt-list-timberborn)
 - [Wrong ELF class](#wrong-elf-class-errors-during-start)
+- [Have troubles with mods?](#have-troubles-with-mods)
 
 ---
 
@@ -93,10 +108,9 @@ WINEDLLOVERRIDES="winhttp=n,b"
 
 ---
 
-#### Protontricks runs but doesn't create winhttp.dll in the game dir
-> this issue is not well studied
-
-Some reports say that it may be caused by permissions issue.
+#### Protontricks can't substitute **winhttp.dll** due to missing write permission
+> before issue was referred incorrectly, you always have **winhttp.dll** with bepinex distribution, but you need to add it into your proton dir.
+Step to add permissions is now added into main guide, this section just lists some more detailed references.
 
 One can try deleting **winhttp.dll** in your proton prefix (prefixes are located in your steam library `Steam/steamapps/compatdata/` file under it in `windows/syswow64/`) and re-trying running protontricks step again
 
@@ -106,7 +120,8 @@ Inside *your* steam library
 ls -l steamapps/compatdata/1062090/pfx/dosdevices/c:/windows/syswow64/ | grep winhttp                                            ✔
 lrwxrwxrwx 1 gin gin      99 sep 24 16:56 winhttp.dll -> /<your steam lib>/steamapps/common/Proton - Experimental/files/lib/wine/i386-windows/winhttp.dll
 ```
-This shows file on this location is actually a link, copy the full path on the right without the file name. `<your steam lib>` will be your actual steam library path, replace it with it in commands beneath. Proton version will also depend on one you've using to launch the game (set in Steam game's properties)
+This shows file on this location is actually a link, copy the full path on the right without the file name. `<your steam lib>` will be your actual steam library path, replace it with it in commands beneath. Proton version will also depend on one you've using to launch the game (set in Steam game's properties)  
+Steam library can be seen in Steam -> Settings -> Storage. You may have multiple libraries, verify where is used Proton version is located if so.
 > Don't forget to wrap paths that have spaces (proton path do) in `""`
 ```sh
 ls -la '/<your steam lib>/steamapps/common/Proton - Experimental/files/lib/wine/i386-windows/' | grep winhttp                                      ✔
@@ -174,6 +189,11 @@ ERROR: ld.so: object '<...>/Steam/ubuntu12_32/gameoverlayrenderer.so' from LD_PR
 It's not necessary a problem preventing starting game or loading mods.
 
 I have a guess it's caused by Proton apparently using 64-bit prefixes and failing to load some 32-bit utils. Further insight on it is welcome.
+
+#### Have troubles with mods?
+Note that different game version might require different mod versions.  
+First check this guide: ["Troubleshooting mod setup" on Mod.io](https://mod.io/g/timberborn/r/troubleshooting-mod-setup)  
+Contact me or mod authors: [Timberborn official Discord](https://discord.com/channels/558398674389172225/1064824959697944666)  
 
 # How to use the SCRIPT
 > Depricated, try only if prior steps didn't work on themselves.
