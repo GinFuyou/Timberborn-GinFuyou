@@ -153,8 +153,8 @@ Then re-try protontricks step.
    > Pip complaining about running with sudo is giving a *generally* good advice, but it's not critical for us, and might be tricky to use, just ignore it in this case.
 
 - For **Steam Deck** there is a different suggestion, but a report suggests generic way works contrary to this claim:
-   > If you have a Steam Deck, the `protontricks --gui` command most likely won't work. Instead, you need to install protontricks via discovery store, and then launch it via the Steam search bar. Launching it via discovery store won't work. 
-   — Taken from [this guide](https://docs.bepinex.dev/articles/advanced/proton_wine.html)
+   > If you have a Steam Deck, the `protontricks --gui` command most likely won't work. Instead, you need to install protontricks via discovery store, and then launch it via the Steam search bar. Launching it via discovery store won't work.   
+   Taken from [this guide](https://docs.bepinex.dev/articles/advanced/proton_wine.html)
    
 - If you have troubles with `pip` or using **Steam Deck** you might try using `flatpack` installation instead, see: [protontricks installation](https://github.com/Matoking/protontricks#installation)
   
@@ -181,17 +181,17 @@ If it doesn't help - some suggest using **pipx** instead.
 > **pipx** is just a wrapper around **pip** that uses isolated environment for installs, but perhaps it could bystep some problems base pip may have on your system
 
 1. install **pipx** ([official guide](https://github.com/pypa/pipx#install-pipx))
-```sh
-pip install --user pipx
-```
+    ```sh
+    pip install --user pipx
+    ```
 2. make **pipx** ensure that terminal is configured correctly for usage (PATH env var)
-```sh
-pipx ensurepath
-```
+    ```sh
+    pipx ensurepath
+    ```
 3. install **protontricks** with **pipx** now.
-```sh
-pipx install protontricks
-``` 
+    ```sh
+    pipx install protontricks
+    ``` 
 > Note that neither command using `sudo` (executing command as priviledged user) `--user` will install into your (current user) home folder, then **pipx** will also use dir inside home. Use this if you don't want or can't use root (sudo).
 
 ---
@@ -211,6 +211,8 @@ ERROR: ld.so: object '<...>/Steam/ubuntu12_32/gameoverlayrenderer.so' from LD_PR
 It's not necessary a problem preventing starting game or loading mods.
 
 I have a guess it's caused by Proton apparently using 64-bit prefixes and failing to load some 32-bit utils. Further insight on it is welcome.
+
+---
 
 <h4 id=''>Have troubles with mods?</h4> 
 
