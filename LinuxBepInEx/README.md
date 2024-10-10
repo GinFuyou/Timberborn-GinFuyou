@@ -1,3 +1,16 @@
+# OUTDATED [10.10.2024]
+With coming of Update 6 on 10.10.2024 game introduces built-in modding support. All platforms including unofficial Linux via wine\proton now should run mods without any additional steps.
+So this guide mostly has meaning as a legacy option. (Though might be useful for other games as some were used compiling the guide as well)
+
+Note that new system doesn't rely on BepinEx so mod installation process is different.
+
+Guide is going to stay at least on https://github.com/GinFuyou/Timberborn-GinFuyou/tree/main/LinuxBepInEx
+
+In case if some other instructions would be valuable for modding on Linux they might be prepended to the guide in future. You can suggest them in github issues or Mod.io comments.
+
+*You may use any information in this guide to build your own without any prior approval. Crediting is optional.* 
+
+
 # Introduction
 **This is a guide for installing and using mods on Linux systems via Proton for ![Timberborn logo](https://raw.githubusercontent.com/GinFuyou/Timberborn-GinFuyou/main/LinuxBepInEx/illustrations/Timberborn20x.webp "Timberborn") [Timberborn](https://store.steampowered.com/app/1062090/Timberborn/ "Game Steam store page")** 
 
